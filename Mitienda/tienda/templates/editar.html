@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %} Principal {% endblock %}
+{% block contenido %}
+    {% load static %}
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table table-hover">
+            {{form}}
+        </table>
+        <button class="btn btn-success">Editar</button>
+
+    </form>
+{% endblock %}

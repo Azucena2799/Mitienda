@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block titulo %} Plantas {% endblock %}
+{% block contenido %}
+    {% load static %}
+
+<h1>Lista de Plantas</h1>   
+<a type="button" class="btn btn-primary" href="{% url 'tienda:AgregarPlanta' %}">Agregar </a>
+
+{% if productos %}
+<ul>
+    <table class="table table-hover">
+        <thead>
+            <th style="background-color:#43e423;" class="  text-center">
+                Planta
+            </th>
+            <th style="background-color:#43e423;" class="  text-center">
+                Opciones
+            </th>
+
+            {% for p in productos %}
+            <tr>
+                <th class="text-center">
+                    <img src="{{ p.imagen.url }}" class="img-responsive"
+                        style="width: 10" alt="200" width="220" height="200" />
+                    <h5 class="card-title">Nombre: {{p.nombre}}</h5>
+                    <p class="card-text">Precio: ${{p.precio}}</p>
+                    <h6>Cantidad: {{p.existencia}}</h6>
+                </th>
+                <th class="text-center">
+                    <a href="{% url 'tienda:deletep' p.id %}" class="btn btn-danger">Eliminar</a>
+
+                </th>
+
+            </tr>
+
+
+            {% endfor %}
+        </thead>
+    </table>
+
+</ul>
+{%else %}
+No hay plantas registradas
+{% endif %}
+
+{% endblock %}

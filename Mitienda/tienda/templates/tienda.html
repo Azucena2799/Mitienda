@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titulo %} Plantas {% endblock %}
+{% block contenido %}
+{% load static %}
+{% if productos %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 align-self-center"><h1 class="display-1 ">Mi tienda "Azu"</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="row" style="padding: 10px 0;">
+                    <div class="col-12">
+                        <div class="row">
+                            {% for producto in productos %}
+                            {% if producto.existencia   > 0 %}
+                            <center>
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="200" width="220" height="200">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{producto.nombre}}</h5>
+                                  <p class="card-text">${{producto.precio}}</p>
+                                  
+                                  <h6>Cantidad: {{producto.existencia}}</h6>
+                                  <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+                            
+
+                                </div>
+                            </div>
+                            </center>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                {% include "carrito.html" %}
+            </div>
+        </div>
+    </div>
+
+    {%else %}
+No hay plantas registradas
+{% endif %}
+
+{% endblock %}
